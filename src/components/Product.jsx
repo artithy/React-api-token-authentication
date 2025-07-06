@@ -5,18 +5,18 @@ export default function Product() {
 
     const [name, setName] = useState("");
     const [sku, setSku] = useState("");
-    const [categoryId, setCategoryId] = useState("");
+    const [category_id, setCategoryId] = useState("");
     const [price, setPrice] = useState("");
-    const [discountPrice, setDiscountPrice] = useState("");
-    const [vatPercentage, setVatPercentage] = useState("");
-    const [stockQuantity, setStockQuantity] = useState("");
+    const [discount_price, setDiscountPrice] = useState("");
+    const [vat_percentage, setVatPercentage] = useState("");
+    const [stock_quantity, setStockQuantity] = useState("");
     const [status, setStatus] = useState("active");
     const [message, setMessage] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!name || !sku || !categoryId || !price) {
+        if (!name || !sku || !category_id || !price) {
             alert("please fill all fields");
             return;
         }
@@ -32,11 +32,11 @@ export default function Product() {
                 token,
                 name,
                 sku,
-                categoryId,
+                category_id,
                 price,
-                discountPrice,
-                vatPercentage,
-                stockQuantity,
+                discount_price,
+                vat_percentage,
+                stock_quantity,
                 status,
 
             });
@@ -86,36 +86,36 @@ export default function Product() {
                 <input
                     type="number"
                     placeholder="Category ID"
-                    value={categoryId}
-                    onChange={(e) => setCategoryId(e.target.value)} />
+                    value={category_id}
+                    onChange={(e) => setCategoryId(Number(e.target.value))} />
                 <br />
 
                 <input
                     type="number"
                     placeholder="price"
                     value={price}
-                    onChange={(e) => setPrice(e.target.value)} />
+                    onChange={(e) => setPrice(Number(e.target.value))} />
                 <br />
 
                 <input
                     type="number"
                     placeholder="Discount price"
-                    value={discountPrice}
-                    onChange={(e) => setDiscountPrice(e.target.value)} />
+                    value={discount_price}
+                    onChange={(e) => setDiscountPrice(Number(e.target.value))} />
                 <br />
 
                 <input
                     type="number"
                     placeholder="Vat Percentage"
-                    value={vatPercentage}
-                    onChange={(e) => setVatPercentage(e.target.value)} />
+                    value={vat_percentage}
+                    onChange={(e) => setVatPercentage(Number(e.target.value))} />
                 <br />
 
                 <input
                     type="number"
                     placeholder="Stock Quantity"
-                    value={stockQuantity}
-                    onChange={(e) => setStockQuantity(e.target.value)} />
+                    value={stock_quantity}
+                    onChange={(e) => setStockQuantity(Number(e.target.value))} />
                 <br />
 
                 <select value={status} onChange={(e) => setStatus(e.target.value)} >
