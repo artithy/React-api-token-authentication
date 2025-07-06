@@ -6,6 +6,7 @@ import './App.css'
 import Registration from './components/Registration';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import Product from './components/Product';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/product" element={<Product />} />
       </Routes>
 
     </>
