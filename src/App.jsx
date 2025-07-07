@@ -7,7 +7,8 @@ import Registration from './components/Registration';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Product from './components/Product';
-
+import Category from './components/Category';
+import Products from './components/Products';
 function App() {
   return (
     <>
@@ -16,7 +17,9 @@ function App() {
         <Route path="/" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/category" element={<Category />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/products" element={<Products />} />
       </Routes>
 
     </>

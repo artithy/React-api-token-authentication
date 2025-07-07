@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Product() {
@@ -12,9 +12,16 @@ export default function Product() {
     const [stock_quantity, setStockQuantity] = useState("");
     const [status, setStatus] = useState("active");
     const [message, setMessage] = useState("");
+    const [catagories, setCategories] = useState([]);
+    const [categoryLoaded, setCatagoryLoaded] = useState(false);
+
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+
 
         if (!name || !sku || !category_id || !price) {
             alert("please fill all fields");
@@ -62,6 +69,27 @@ export default function Product() {
         }
     }
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/api/categories");
+                setCategories(response.data.categories);
+                setCatagoryLoaded(true);
+            } catch (error) {
+
+                console.error("Failed to fetch categories:", error);
+
+            }
+
+        }
+
+        if (!categoryLoaded) {
+            fetchCategories();
+        }
+        return () => { }
+    }, [categoryLoaded]);
+
+
 
     return (
         <>
@@ -83,11 +111,23 @@ export default function Product() {
                     onChange={(e) => setSku(e.target.value)} />
                 <br />
 
-                <input
+                {/* <input
                     type="number"
                     placeholder="Category ID"
                     value={category_id}
                     onChange={(e) => setCategoryId(Number(e.target.value))} />
+                <br /> */}
+
+                <select placeholder="Category ID"
+                    defaultValue={category_id}
+                    onChange={(e) => setCategoryId(e.target.value)}>
+                    <option value="">Select Category</option>
+                    {catagories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
                 <br />
 
                 <input
