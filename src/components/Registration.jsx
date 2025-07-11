@@ -4,7 +4,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function Registration() {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -12,17 +11,17 @@ export default function Registration() {
         e.preventDefault();
 
         if (email === "" || password === "") {
-            alert("please fill all fields");
+            alert("Please fill all fields.");
             return;
         }
 
-        if (!email.includes("@") && !email.includes(".")) {
-            alert("please enter a valid email");
+        if (!email.includes("@") || !email.includes(".")) { // Corrected email validation
+            alert("Please enter a valid email.");
             return;
         }
 
         if (password.length < 6) {
-            alert("password must be at least 6 characters long");
+            alert("Password must be at least 6 characters long.");
             return;
         }
         try {
@@ -36,14 +35,20 @@ export default function Registration() {
             if (error.response && error.response.data && error.response.data.message) {
                 alert(error.response.data.message);
             } else {
-                alert("Registration failed. please try again.");
+                alert("Registration failed. Please try again.");
             }
         }
     };
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h2>Register</h2>
+        // Main container div for centering and background
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+            <form
+                onSubmit={handleSubmit}
+                // Form styling: background, padding, shadow, border-radius, max-width, margin-auto, flex for children
+                className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm flex flex-col items-center space-y-4"
+            >
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">Register</h2>
 
                 <input
                     type="email"
@@ -51,6 +56,8 @@ export default function Registration() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    // Input field styling: full width, padding, border, border-radius, focus outline
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
                 <input
@@ -59,14 +66,27 @@ export default function Registration() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    // Input field styling
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
-                <button type="submit">
+                <button
+                    type="submit"
+                    // Button styling: full width, background, text color, padding, border-radius, hover effect
+                    className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
+                >
                     Register
                 </button>
+
+                <p className="mt-4 text-gray-600">
+                    Already registered?{" "}
+                    <Link to="/login" className="text-blue-500 hover:underline">
+                        Login
+                    </Link>
+                </p>
             </form>
 
-            <p>Already registered? <Link to="/login">Login</Link></p>
+
         </div>
     );
 }
